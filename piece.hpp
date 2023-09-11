@@ -14,7 +14,7 @@ public:
     void setX(int x);
     void setY(int y);
     void setColor(COLOR color);
-    friend std::ostream& operator<<(std::ostream& flux, const Pawn& p);
+    friend std::ostream& operator<<(std::ostream& flux, const Piece& p);
 
 protected:
     int x;
