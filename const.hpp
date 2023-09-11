@@ -1,0 +1,1 @@
+enum COLOR {WHITE, BLACK};
