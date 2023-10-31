@@ -1,4 +1,5 @@
 #include <iostream>
+#include <ostream>
 #include "piece.hpp"
 
 //Piece definitions
@@ -17,15 +18,16 @@ Piece::Piece(int x, int y, COLOR color) {
 Piece::~Piece() {
 }
 
-int Piece::getX() {
+
+int Piece::getX() const{
     return x;
 }
 
-int Piece::getY() {
+int Piece::getY() const{
     return y;
 }
 
-int Piece::getColor() {
+int Piece::getColor() const{
     return color;
 }
 
@@ -43,7 +45,10 @@ void Piece::setColor(COLOR color) {
 
 
 // Pawn definitions
-Pawn::Pawn() {
+Pawn::Pawn() 
+    //define name
+    
+{
     moved = false;
 }
 
@@ -250,34 +255,4 @@ bool King::isValid(int x, int y) {
 
 bool King::isMoved() {
     return moved;
-}
-
-std::ostream& operator<<(std::ostream& flux, const Pawn& p){
-    flux << p.name << "," << p.x << "," << p.y;
-    return flux;
-}
-
-std::ostream& operator<<(std::ostream& flux, const Rook& r){
-    flux << r.name << "," << r.x << "," << r.y;
-    return flux;
-}
-
-std::ostream& operator<<(std::ostream& flux, const Knight& k){
-    flux << k.name << "," << k.x << "," << k.y;
-    return flux;
-}
-
-std::ostream& operator<<(std::ostream& flux, const Bishop& b){
-    flux << b.name << "," << b.x << "," << b.y;
-    return flux;
-}
-
-std::ostream& operator<<(std::ostream& flux, const Queen& q){
-    flux << q.name << "," << q.x << "," << q.y;
-    return flux;
-}
-
-std::ostream& operator<<(std::ostream& flux, const King& k){
-    flux << k.name << "," << k.x << "," << k.y;
-    return flux;
 }

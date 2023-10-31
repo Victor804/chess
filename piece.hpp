@@ -1,20 +1,36 @@
 #include "const.hpp"
 #include <iostream>
+#include <ostream>
 
 #pragma once
+
+/*
+TYPES OF PIECES:
+    - Pawn   :  0
+    - Rook   :  1
+    - Knight :  2
+    - Bishop :  3
+    - Queen  :  4
+    - King   :  5
+*/
 
 class Piece {
 public:
     Piece();
     Piece(int x, int y, COLOR color);
     ~Piece();
-    int getX();
-    int getY();
-    int getColor();
+    int getX() const;
+    int getY() const;
+    int getColor() const;
     void setX(int x);
     void setY(int y);
     void setColor(COLOR color);
-    friend std::ostream& operator<<(std::ostream& flux, const Piece& p);
+    virtual int getType() const = 0;
+
+    virtual bool isValid(int x, int y){ return false;};
+    virtual bool isMoved(){ return false;};
+    virtual bool canBePromoted(){ return false;};
+
 
 protected:
     int x;
@@ -27,13 +43,12 @@ public:
     Pawn();
     Pawn(int x, int y, COLOR color);
     ~Pawn();
+    int getType() const { return 0;};
     bool isValid(int x, int y);
     bool isMoved();
     bool canBePromoted();
-    friend std::ostream& operator<<(std::ostream& flux, const Pawn& p);
 
 private:
-    const char* name = "PAWN";
     bool moved;
 };
 
@@ -42,12 +57,11 @@ public:
     Rook();
     Rook(int x, int y, COLOR color);
     ~Rook();
+    int getType() const { return 1;};
     bool isValid(int x, int y);
     bool isMoved();
-    friend std::ostream& operator<<(std::ostream& flux, const Rook& r);
 
 private:
-    const char* name = "ROOK";
     bool moved;
 };
 
@@ -56,11 +70,9 @@ public:
     Knight();
     Knight(int x, int y, COLOR color);
     ~Knight();
+    int getType() const { return 2;};
     bool isValid(int x, int y);
-    friend std::ostream& operator<<(std::ostream& flux, const Knight& k);
 
-private:
-    const char* name = "KNIGHT";
 };
 
 class Bishop : public Piece {
@@ -68,12 +80,9 @@ public:
     Bishop();
     Bishop(int x, int y, COLOR color);
     ~Bishop();
+    int getType() const { return 3;};
     bool isValid(int x, int y);
-    friend std::ostream& operator<<(std::ostream& flux, const Bishop& b);
 
-
-private:
-    const char* name = "BISHOP";
 };  
 
 class Queen : public Piece {
@@ -81,11 +90,9 @@ public:
     Queen();
     Queen(int x, int y, COLOR color);
     ~Queen();
+    int getType() const { return 4;};
     bool isValid(int x, int y);
-    friend std::ostream& operator<<(std::ostream& flux, const Queen& q);
 
-private:
-    const char* name = "QUEEN";
 };
 
 class King : public Piece {
@@ -93,11 +100,10 @@ public:
     King();
     King(int x, int y, COLOR color);
     ~King();
+    int getType() const { return 5;};
     bool isValid(int x, int y);
     bool isMoved();
-    friend std::ostream& operator<<(std::ostream& flux, const King& k);
 
 private:
     bool moved; 
-    const char* name = "KING";
 };  
